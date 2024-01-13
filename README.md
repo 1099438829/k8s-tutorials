@@ -192,15 +192,15 @@ func main() {
 
 ```dockerfile
 # Dockerfile
-FROM golang:1.16-buster AS builder
+FROM golang:1.20-buster AS builder
+ARG GOPROXY=https://goproxy.cn,direct
 RUN mkdir /src
 ADD . /src
 WORKDIR /src
 
-RUN go env -w GO111MODULE=auto
 RUN go build -o main .
 
-FROM gcr.io/distroless/base-debian10
+FROM gcr.io/distroless/base-debian12
 
 WORKDIR /
 
